@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>cmd_base64_cs</RootNamespace>
+    <AssemblyName>base64</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
