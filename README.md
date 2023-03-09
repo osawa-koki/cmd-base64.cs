@@ -16,12 +16,14 @@ dotnet publish --configuration Release --output ./bin
 
 ```shell
 ./bin/base64 --encode --input <エンコード対象ファイル> --output <出力先ファイル>
+./bin/base64 --encode --input input.png --output output.txt
 ```
 
 ### デコード
 
 ```shell
 ./bin/base64 --decode --input <デコード対象ファイル> --output <出力先ファイル>
+./bin/base64 --decode --input input.txt --output output.png
 ```
 
 ---
