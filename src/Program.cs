@@ -40,7 +40,6 @@ void DecodeFile(string inputFilePath, string outputFilePath)
   {
     base64 = base64.PadRight(base64.Length + (4 - padding), '=');
   }
-  Console.WriteLine($"{base64}");
   byte[] bytes = Convert.FromBase64String(base64);
   File.WriteAllBytes(outputFilePath, bytes);
   Console.WriteLine("Decoded successfully.");
