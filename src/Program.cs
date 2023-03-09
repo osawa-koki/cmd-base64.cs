@@ -6,8 +6,8 @@ void RunOptions(Options options)
 {
   string inputFilePath = options.InputFilePath!;
   string outputFilePath = options.OutputFilePath!;
-  bool encode = options.Encode!;
-  bool decode = options.Decode!;
+  bool encode = options.Encode;
+  bool decode = options.Decode;
 
   // 指定されたオプションに応じてエンコードまたはデコードを行う
   if (encode)
@@ -34,7 +34,13 @@ void EncodeFile(string inputFilePath, string outputFilePath)
 
 void DecodeFile(string inputFilePath, string outputFilePath)
 {
-  string base64 = File.ReadAllText(inputFilePath);
+  string base64 = File.ReadAllText(inputFilePath).Trim();
+  int padding = base64.Length % 4;
+  if (padding > 0)
+  {
+    base64 = base64.PadRight(base64.Length + (4 - padding), '=');
+  }
+  Console.WriteLine($"{base64}");
   byte[] bytes = Convert.FromBase64String(base64);
   File.WriteAllBytes(outputFilePath, bytes);
   Console.WriteLine("Decoded successfully.");
@@ -48,9 +54,9 @@ class Options
   [Option('o', "output", Required = true, HelpText = "Output file path.")]
   public string? OutputFilePath { get; set; }
 
-  [Option('e', "encode", Required = true, HelpText = "Encode input file.")]
+  [Option('e', "encode", Required = false, HelpText = "Encode input file.")]
   public bool Encode { get; set; }
 
-  [Option('d', "decode", Required = true, HelpText = "Decode input file.")]
+  [Option('d', "decode", Required = false, HelpText = "Decode input file.")]
   public bool Decode { get; set; }
 }
